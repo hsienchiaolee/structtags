@@ -9,14 +9,14 @@ type StructTags struct {
 	tags []*Tags
 }
 
-func (st *StructTags) Names(key string) []string {
-	var names []string
+func (st *StructTags) Tags(key string) []*Tag {
+	var tags []*Tag
 	for _, ts := range st.tags {
-		if t := ts.Get(key); t != nil && t.Name != "" {
-			names = append(names, t.Name)
+		if t := ts.Get(key); t != nil {
+			tags = append(tags, t)
 		}
 	}
-	return names
+	return tags
 }
 
 func Parse(object interface{}) *StructTags {
