@@ -5,10 +5,13 @@ import (
 	"strings"
 )
 
+// StructTags is a collect of Tag structs
+// for all properties in a struct
 type StructTags struct {
 	tags []*Tags
 }
 
+// Tags returns all Tags with matching tag key
 func (st *StructTags) Tags(key string) []*Tag {
 	var tags []*Tag
 	for _, ts := range st.tags {
@@ -19,6 +22,7 @@ func (st *StructTags) Tags(key string) []*Tag {
 	return tags
 }
 
+// Parse creates a StructTag from an object
 func Parse(object interface{}) *StructTags {
 	var tags []*Tags
 

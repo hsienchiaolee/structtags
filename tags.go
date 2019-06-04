@@ -4,10 +4,13 @@ import (
 	"strings"
 )
 
+// Tags is a collection of Tag structs
+// for a single property in a struct
 type Tags struct {
 	tags []*Tag
 }
 
+// Keys returns all keys of the tags
 func (ts *Tags) Keys() []string {
 	var keys []string
 	for _, t := range ts.tags {
@@ -16,6 +19,8 @@ func (ts *Tags) Keys() []string {
 	return keys
 }
 
+// Get returns the tag matching the given key,
+// returns nil if none is found
 func (ts *Tags) Get(key string) *Tag {
 	for _, t := range ts.tags {
 		if t.Key == key {
@@ -25,6 +30,11 @@ func (ts *Tags) Get(key string) *Tag {
 	return nil
 }
 
+// parseTag creates tags using a multi-tag definition string
+// e.g. db:"name" json:"name" -> *Tags{tags: []*Tag{
+//   &Tag{Key:db Name:name Options:[]},
+//   &Tag{Key:json Name:name Options:[]},
+// }}
 func parseTags(s string) *Tags {
 	var tags []*Tag
 
